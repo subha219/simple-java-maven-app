@@ -1,24 +1,19 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
+
+    environment{
+        def mystring="Hello World"
+        def mynumber=10
+        def myboolean=true
+    }
+
+    stages{
+        stage("Demo"){
+            steps{
+                echo "My string : ${mystring}"
+                echo "My number : ${mynumber}"
+                echo "My bool : ${myboolean}"
+
             }
         }
     }
